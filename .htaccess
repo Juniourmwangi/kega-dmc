@@ -1,0 +1,5 @@
+# Force HTTPS and use the non-www address
+RewriteEngine On
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteRule ^(.*)$ https://kegadmc.com/$1 [L,R=301]

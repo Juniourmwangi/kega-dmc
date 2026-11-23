@@ -1,0 +1,7 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home3/jamesmw1/kegadmc.com/
+    - /bin/cp index.html $DEPLOYPATH
+    - /bin/cp .htaccess $DEPLOYPATH
+    - /bin/cp -r images $DEPLOYPATH
