@@ -630,16 +630,34 @@ footer{background:var(--green-dark);color:#cfd8d2;padding:30px 0;text-align:cent
       <!-- Right column: contact form -->
       <form id="contactForm">
         <div class="row">
-          <div><label for="name">Full name</label><input id="name" required></div>
-          <div><label for="email">Email</label><input id="email" type="email" required></div>
+          <div><label for="name">Full name</label><input id="name" autocomplete="name" required></div>
+          <div><label for="email">Email</label><input id="email" type="email" autocomplete="email" required></div>
         </div>
         <div class="row">
-          <div><label for="phone">Phone / WhatsApp</label><input id="phone"></div>
+          <div><label for="phone">Phone / WhatsApp</label><input id="phone" type="tel" autocomplete="tel"></div>
           <div><label for="type">I am a...</label>
             <select id="type">
               <option>Travel Agent</option><option>Tour Operator</option><option>Corporate Group</option>
             </select></div>
         </div>
+        <!-- NEW FIELDS: company details, country, position, tour operator question -->
+        <div class="row">
+          <div><label for="company">Company name</label><input id="company" autocomplete="organization" required></div>
+          <div><label for="website">Company website</label><input id="website" type="text" inputmode="url" placeholder="www.yourcompany.com"></div>
+        </div>
+        <div class="row">
+          <div><label for="country">Country</label><input id="country" autocomplete="country-name" required></div>
+          <div><label for="position">Position held</label>
+            <select id="position" required>
+              <option value="">Select position</option>
+              <option>Executive</option><option>Country Manager</option><option>Tour Consultant</option>
+            </select></div>
+        </div>
+        <label for="touroperator">Are you a tour operator?</label>
+        <select id="touroperator" required>
+          <option value="">Select</option>
+          <option>Yes</option><option>No</option>
+        </select>
         <label for="interest">Service needed</label>
         <select id="interest">
           <option>Hotel Booking</option><option>Airport Transfer</option>
@@ -684,8 +702,8 @@ document.getElementById('year').textContent = new Date().getFullYear();
 document.getElementById('contactForm').addEventListener('submit', function (e) {
   e.preventDefault();
   const v = id => document.getElementById(id).value;
-  const body = `Name: ${v('name')}\nEmail: ${v('email')}\nPhone: ${v('phone')}\nI am a: ${v('type')}\nService: ${v('interest')}\n\n${v('message')}`;
-  window.location.href = `mailto:info@kegadmc.com?subject=${encodeURIComponent('Quote request: ' + v('interest'))}&body=${encodeURIComponent(body)}`;
+  const body = `Name: ${v('name')}\nEmail: ${v('email')}\nPhone: ${v('phone')}\nI am a: ${v('type')}\nCountry: ${v('country')}\nCompany: ${v('company')}\nWebsite: ${v('website')}\nPosition: ${v('position')}\nTour operator: ${v('touroperator')}\nService: ${v('interest')}\n\n${v('message')}`;
+  window.location.href = `mailto:info@kegadmc.com?subject=${encodeURIComponent('Quote request: ' + v('interest') + ' (' + v('company') + ')')}&body=${encodeURIComponent(body)}`;
   document.getElementById('formMsg').textContent = 'Thank you! Your email app should open with your enquiry.';
 });
 </script>
